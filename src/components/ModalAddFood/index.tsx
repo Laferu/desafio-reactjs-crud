@@ -1,46 +1,47 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback } from 'react'
 
-import { FiCheckSquare } from 'react-icons/fi';
-import { FormHandles } from '@unform/core';
-import { Form } from './styles';
-import Modal from '../Modal';
-import Input from '../Input';
+import { FiCheckSquare } from 'react-icons/fi'
+import { FormHandles } from '@unform/core'
+import { Form } from './styles'
+import Modal from '../Modal'
+import Input from '../Input'
 
 interface IFoodPlate {
-  id: number;
-  name: string;
-  image: string;
-  price: string;
-  description: string;
-  available: boolean;
+  id: number
+  name: string
+  image: string
+  price: string
+  description: string
+  available: boolean
 }
 
 interface ICreateFoodData {
-  name: string;
-  image: string;
-  price: string;
-  description: string;
+  name: string
+  image: string
+  price: string
+  description: string
 }
 
 interface IModalProps {
-  isOpen: boolean;
-  setIsOpen: () => void;
-  handleAddFood: (food: Omit<IFoodPlate, 'id' | 'available'>) => void;
+  isOpen: boolean
+  setIsOpen: () => void
+  handleAddFood: (food: Omit<IFoodPlate, 'id' | 'available'>) => void
 }
 
 const ModalAddFood: React.FC<IModalProps> = ({
   isOpen,
   setIsOpen,
-  handleAddFood,
+  handleAddFood
 }) => {
-  const formRef = useRef<FormHandles>(null);
+  const formRef = useRef<FormHandles>(null)
 
   const handleSubmit = useCallback(
     async (data: ICreateFoodData) => {
-      // TODO ADD A NEW FOOD AND CLOSE THE MODAL
+      handleAddFood(data)
+      setIsOpen()
     },
-    [handleAddFood, setIsOpen],
-  );
+    [handleAddFood, setIsOpen]
+  )
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
